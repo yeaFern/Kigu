@@ -1,4 +1,4 @@
-#include "SomeData.h"
+#include <SomeData.h>
 
 MyDataThing::MyDataThing(const std::string& string)
     : my_string(string)
