@@ -1,7 +1,5 @@
 #pragma once
 
-#include "LoadingManager.h"
-
 #include <string>
 
 struct Settings
@@ -14,7 +12,7 @@ class Application
 private:
 
 public:
-	virtual void OnLoad(LoadingManager& manager) = 0;
+
 };
 
 namespace Kigu
@@ -23,22 +21,20 @@ namespace Kigu
 	void Start(const Settings& settings = {})
 	{
 		static_assert(std::is_base_of<Application, T>::value);
-		T app;
+		T* app = new T;
 
 		// 1. Initialize core systems.
 		//    - GLFW
 		//    - OpenGL
 		//    - OpenAL
 
-		LoadingManager manager;
 		// 2. Do Kigu initialization.
 		//    - Load shaders.
 		//    - Initialize renderers.
 		//    - Show window.
 		//    - Display loading screen.
+		//    - Load application asset manifest.
 		//    - Initialize application.
-		app.OnLoad(manager);
-		//    - Load assets.
 		//    - etc
 	}
 }

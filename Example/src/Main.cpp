@@ -5,11 +5,7 @@
 class MyApplication : Application
 {
 public:
-	void OnLoad(LoadingManager& manager) override
-	{
-		std::cout << "Loading!" << std::endl;
-		// manager.LoadAsset("sprite.png");
-	}
+	
 };
 
 int main(int argc, char** argv)
