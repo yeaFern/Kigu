@@ -380,3 +380,10 @@ MigrationBackup/
 *.exe
 *.out
 *.app
+
+# VS stuff
+.vs/
+**.sln
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user
