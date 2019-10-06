@@ -6,6 +6,7 @@ project "Kigu"
     location "Kigu"
     kind "StaticLib"
     language "C++"
+	cppdialect "C++17"
     staticruntime "on"
 
     includedirs
@@ -24,6 +25,7 @@ project "Example"
     location "Example"
     kind "ConsoleApp"
     language "C++"
+	cppdialect "C++17"
     staticruntime "on"
 
     includedirs
