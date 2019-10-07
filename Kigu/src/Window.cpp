@@ -2,7 +2,7 @@
 
 #include <GLFW/glfw3.h>
 
-void Window::Initialize(const std::string& title)
+Window::Window(const std::string& title)
 {
 	if (!glfwInit())
 	{
@@ -19,18 +19,16 @@ void Window::Initialize(const std::string& title)
 	glfwMakeContextCurrent(m_Window);
 }
 
+Window::~Window()
+{
+	glfwDestroyWindow(m_Window);
+	glfwTerminate();
+}
+
 void Window::Update() const
 {
 	glfwSwapBuffers(m_Window);
 	glfwPollEvents();
-}
-
-void Window::Shutdown()
-{
-	glfwDestroyWindow(m_Window);
-	glfwTerminate();
-
-	m_Window = nullptr;
 }
 
 bool Window::ShouldClose() const

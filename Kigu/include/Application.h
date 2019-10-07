@@ -13,12 +13,24 @@ struct Settings
 class Application
 {
 private:
+	Window m_Window;
 	SceneManager m_SceneManager;
+
 	bool m_Running = true;
 public:
+	Application(const Settings& settings)
+		: m_Window(settings.name)
+	{
+	}
+
 	inline SceneManager& GetSceneManager()
 	{
 		return m_SceneManager;
+	}
+
+	inline Window& GetWindow()
+	{
+		return m_Window;
 	}
 
 	inline void Terminate()
@@ -39,10 +51,8 @@ namespace Kigu
 	{
 		static_assert(std::is_base_of<Scene, T>::value);
 		
-		Application app;
-		app.GetSceneManager().PushScene<T>();
+		Application app(settings);
 
-		Window::GetInstance().Initialize(settings.name);
 		// 1. Initialize core systems.
 		//    - GLFW
 		//    - OpenGL
@@ -57,18 +67,18 @@ namespace Kigu
 		//    - Initialize application.
 		//    - etc
 
+		app.GetSceneManager().PushScene<T>();
+
 		// TODO: Proper engine loop.
 		while (app.IsRunning())
 		{
 			app.GetSceneManager().OnUpdate(app);
 
-			Window::GetInstance().Update();
-			if (Window::GetInstance().ShouldClose())
+			app.GetWindow().Update();
+			if (app.GetWindow().ShouldClose())
 			{
 				app.Terminate();
 			}
 		}
-
-		Window::GetInstance().Shutdown();
 	}
 }
