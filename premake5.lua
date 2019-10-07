@@ -4,13 +4,21 @@ workspace "Kigu"
 	targetdir "Build/Bin/%{prj.name}/%{cfg.longname}"
 	objdir "Build/Obj/%{prj.name}/%{cfg.longname}"
 
+function includeGLFW()
+    includedirs "Dependencies/GLFW/Include"
+end
+
+function linkGLFW()
+    libdirs "Dependencies/GLFW/Lib"
+
+    links "glfw3"
+end
 
 project "Kigu"
     location "Kigu"
     kind "StaticLib"
     language "C++"
     cppdialect "C++17"
-    staticruntime "on"
 
     includedirs
     {
@@ -24,12 +32,13 @@ project "Kigu"
         "Kigu/include/**.h"
     }
 
+    includeGLFW()
+
 project "Example"
     location "Example"
     kind "ConsoleApp"
     language "C++"
     cppdialect "C++17"
-    staticruntime "on"
 
     includedirs
     {
@@ -46,3 +55,6 @@ project "Example"
     {
         "Kigu"
     }
+
+    includeGLFW()
+    linkGLFW()

@@ -7,16 +7,7 @@ class MainScene : public Scene
 public:
 	void OnUpdate(Application& app) override
 	{
-		std::cout << "Update" << std::endl;
 
-		std::cout << "> ";
-		std::string input;
-		std::getline(std::cin, input);
-
-		if (input == "quit")
-		{
-			app.Terminate();
-		}
 	}
 };
 

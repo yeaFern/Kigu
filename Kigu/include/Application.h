@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Window.h"
 #include "Scene.h"
 
 #include <string>
@@ -41,6 +42,7 @@ namespace Kigu
 		Application app;
 		app.GetSceneManager().PushScene<T>();
 
+		Window::GetInstance().Initialize(settings.name);
 		// 1. Initialize core systems.
 		//    - GLFW
 		//    - OpenGL
@@ -59,6 +61,14 @@ namespace Kigu
 		while (app.IsRunning())
 		{
 			app.GetSceneManager().OnUpdate(app);
+
+			Window::GetInstance().Update();
+			if (Window::GetInstance().ShouldClose())
+			{
+				app.Terminate();
+			}
 		}
+
+		Window::GetInstance().Shutdown();
 	}
 }
