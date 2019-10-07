@@ -1,5 +1,6 @@
 #include "..\include\Window.h"
 
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 Window::Window(const std::string& title)
@@ -17,6 +18,13 @@ Window::Window(const std::string& title)
 	}
 
 	glfwMakeContextCurrent(m_Window);
+
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	{
+		glfwTerminate();
+		glfwDestroyWindow(m_Window);
+		std::cout << "Failed to initialize OpenGL." << std::endl;
+	}
 }
 
 Window::~Window()

@@ -5,6 +5,9 @@
 
 #include <string>
 
+// TODO: Temporary.
+#include <glad/glad.h>
+
 struct Settings
 {
 	std::string name = "Kigu";
@@ -73,6 +76,15 @@ namespace Kigu
 		while (app.IsRunning())
 		{
 			app.GetSceneManager().OnUpdate(app);
+
+			glBegin(GL_TRIANGLES);
+			glColor3f(1.0f, 0.0f, 0.0f);
+			glVertex2f(0.0f, 0.5f);
+			glColor3f(0.0f, 1.0f, 0.0f);
+			glVertex2f(-0.5f, -0.5f);
+			glColor3f(0.0f, 0.0f, 1.0f);
+			glVertex2f(0.5f, -0.5f);
+			glEnd();
 
 			app.GetWindow().Update();
 			if (app.GetWindow().ShouldClose())

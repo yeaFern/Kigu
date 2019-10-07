@@ -22,14 +22,17 @@ project "Kigu"
 
     includedirs
     {
-        "Kigu/include"
+        "Kigu/include",
+        "Dependencies/glad/Include"
     }
 
     files
     {
         "Kigu/src/**.cpp",
         "Kigu/src/**.h",
-        "Kigu/include/**.h"
+        "Kigu/include/**.h",
+
+        "Dependencies/glad/Src/**.c"
     }
 
     includeGLFW()
@@ -42,7 +45,8 @@ project "Example"
 
     includedirs
     {
-        "Kigu/include"
+        "Kigu/include",
+        "Dependencies/glad/Include" -- TODO: Temporary.
     }
 
     files
