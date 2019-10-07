@@ -1,5 +1,8 @@
 workspace "Kigu"
     configurations { "Debug", "Release" }
+    
+	targetdir "Build/Bin/%{prj.name}/%{cfg.longname}"
+	objdir "Build/Obj/%{prj.name}/%{cfg.longname}"
 
 
 project "Kigu"
