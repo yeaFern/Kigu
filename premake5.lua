@@ -36,6 +36,7 @@ project "Kigu"
     }
 
     includeGLFW()
+    linkGLFW()
 
 project "Example"
     location "Example"
@@ -60,5 +61,3 @@ project "Example"
         "Kigu"
     }
 
-    includeGLFW()
-    linkGLFW()
