@@ -20,21 +20,11 @@ public:
 	}
 };
 
-class MyApplication : public Application
-{
-public:
-	void OnInitialize() override
-	{
-		std::cout << "Initialized!" << std::endl;
-		GetSceneManager().PushScene<MainScene>();
-	}
-};
-
 int main(int argc, char** argv)
 {
 	Settings settings;
 
-	Kigu::Start<MyApplication>(settings);
+	Kigu::Start<MainScene>(settings);
 
 	return 0;
 }

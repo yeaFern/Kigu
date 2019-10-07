@@ -15,8 +15,6 @@ private:
 	SceneManager m_SceneManager;
 	bool m_Running = true;
 public:
-	virtual void OnInitialize() = 0;
-public:
 	inline SceneManager& GetSceneManager()
 	{
 		return m_SceneManager;
@@ -38,8 +36,10 @@ namespace Kigu
 	template<class T>
 	void Start(const Settings& settings = {})
 	{
-		static_assert(std::is_base_of<Application, T>::value);
-		T* app = new T;
+		static_assert(std::is_base_of<Scene, T>::value);
+		
+		Application app;
+		app.GetSceneManager().PushScene<T>();
 
 		// 1. Initialize core systems.
 		//    - GLFW
@@ -55,12 +55,10 @@ namespace Kigu
 		//    - Initialize application.
 		//    - etc
 
-		app->OnInitialize();
-
 		// TODO: Proper engine loop.
-		while (app->IsRunning())
+		while (app.IsRunning())
 		{
-			app->GetSceneManager().OnUpdate(*app);
+			app.GetSceneManager().OnUpdate(app);
 		}
 	}
 }
