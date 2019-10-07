@@ -60,4 +60,3 @@ project "Example"
     {
         "Kigu"
     }
-
