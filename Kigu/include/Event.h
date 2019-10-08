@@ -42,7 +42,7 @@ public:
 	template<class T, class... Args>
 	inline void Add(Args&&... args)
 	{
-		m_Queue.push(std::make_shared<T>(args...));
+		m_Queue.push(std::make_shared<T>(std::forward<Args>(args)...));
 	}
 
 	void Process(std::function<void(const Event&)> callback);
