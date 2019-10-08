@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Error.h"
+
 #include "Application.h"
 #include "AssetManifest.h"
 

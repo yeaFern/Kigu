@@ -8,14 +8,14 @@ Window::Window(const std::string& title, EventQueue& eventQueue)
 {
 	if (!glfwInit())
 	{
-		std::cout << "Failed to initialize GLFW." << std::endl;
+		KIGU_FATAL("Failed to initialize GLFW.");
 	}
 
 	m_Window = glfwCreateWindow(1280, 720, title.c_str(), nullptr, nullptr);
 	if (!m_Window)
 	{
 		glfwTerminate();
-		std::cout << "Failed to create window." << std::endl;
+		KIGU_FATAL("Failed to create window.");
 	}
 
 	glfwMakeContextCurrent(m_Window);
@@ -24,7 +24,7 @@ Window::Window(const std::string& title, EventQueue& eventQueue)
 	{
 		glfwTerminate();
 		glfwDestroyWindow(m_Window);
-		std::cout << "Failed to initialize OpenGL." << std::endl;
+		KIGU_FATAL("Failed to initialize OpenGL.");
 	}
 
 	glfwSetWindowUserPointer(m_Window, &m_EventQueue);

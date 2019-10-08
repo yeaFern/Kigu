@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Event.h"
+#include "Error.h"
 
 #include <string>
 #include <iostream>
