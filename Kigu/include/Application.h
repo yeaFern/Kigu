@@ -2,6 +2,7 @@
 
 #include "Window.h"
 #include "Scene.h"
+#include "Event.h"
 
 #include <string>
 
@@ -19,16 +20,23 @@ private:
 	Window m_Window;
 	SceneManager m_SceneManager;
 
+	EventQueue m_EventQueue;
+
 	bool m_Running = true;
 public:
 	Application(const Settings& settings)
-		: m_Window(settings.name)
+		: m_Window(settings.name, m_EventQueue)
 	{
 	}
 
 	inline SceneManager& GetSceneManager()
 	{
 		return m_SceneManager;
+	}
+
+	inline EventQueue& GetEventQueue()
+	{
+		return m_EventQueue;
 	}
 
 	inline Window& GetWindow()
@@ -75,6 +83,10 @@ namespace Kigu
 		// TODO: Proper engine loop.
 		while (app.IsRunning())
 		{
+			app.GetEventQueue().Process([](const Event& e) {
+				std::cout << "Processing event." << std::endl;
+			});
+
 			app.GetSceneManager().OnUpdate(app);
 
 			glBegin(GL_TRIANGLES);

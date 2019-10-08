@@ -1,9 +1,10 @@
-#include "..\include\Window.h"
+	#include "..\include\Window.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-Window::Window(const std::string& title)
+Window::Window(const std::string& title, EventQueue& eventQueue)
+	: m_EventQueue(eventQueue)
 {
 	if (!glfwInit())
 	{
@@ -25,6 +26,12 @@ Window::Window(const std::string& title)
 		glfwDestroyWindow(m_Window);
 		std::cout << "Failed to initialize OpenGL." << std::endl;
 	}
+
+	glfwSetWindowUserPointer(m_Window, &m_EventQueue);
+
+	glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
+		(*((EventQueue*)glfwGetWindowUserPointer(window))).Add<WindowResizeEvent>(width, height);
+	});
 }
 
 Window::~Window()
