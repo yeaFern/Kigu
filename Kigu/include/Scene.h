@@ -11,19 +11,19 @@ class Scene
 private:
 
 public:
-	virtual void OnUpdate(Application& app) = 0;
+	virtual void OnEnter() = 0;
 };
 
 class SceneManager
 {
 private:
-	std::stack<std::unique_ptr<Scene>> m_SceneStack;
+	std::stack<std::shared_ptr<Scene>> m_SceneStack;
 public:
 	void OnUpdate(Application& app) const
 	{
 		if (!m_SceneStack.empty())
 		{
-			m_SceneStack.top()->OnUpdate(app);
+			// Update scene systems.
 		}
 	}
 
@@ -32,7 +32,10 @@ public:
 	{
 		static_assert(std::is_base_of<Scene, T>::value);
 		
-		m_SceneStack.push(std::make_unique<T>());
+		auto scene = std::make_shared<T>();
+		scene->OnEnter();
+
+		m_SceneStack.push(scene);
 	}
 
 	void PopScene()

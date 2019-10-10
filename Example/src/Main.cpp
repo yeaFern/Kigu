@@ -5,9 +5,9 @@
 class MainScene : public Scene
 {
 public:
-	void OnUpdate(Application& app) override
+	void OnEnter() override
 	{
-
+		std::cout << "Adding game objects" << std::endl;
 	}
 };
 
