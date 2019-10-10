@@ -29,6 +29,8 @@ public:
 	{
 	}
 
+	Application(const Application& app) = delete;
+
 	inline SceneManager& GetSceneManager()
 	{
 		return m_SceneManager;
