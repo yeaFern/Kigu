@@ -29,7 +29,7 @@ public:
 	{
 	}
 
-	Application(const Application& app) = delete;
+	Application(const Application&) = delete;
 
 	inline SceneManager& GetSceneManager()
 	{
