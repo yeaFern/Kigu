@@ -23,7 +23,8 @@ project "Kigu"
     includedirs
     {
         "Kigu/include",
-        "Dependencies/glad/Include"
+        "Dependencies/glad/Include",
+        "Dependencies/entt/Include"
     }
 
     files
