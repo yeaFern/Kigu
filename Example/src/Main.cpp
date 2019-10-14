@@ -2,12 +2,19 @@
 
 #include <iostream>
 
+struct MyComponent
+{
+	std::string name;
+};
+
 class MainScene : public Scene
 {
 public:
 	void OnEnter() override
 	{
-		std::cout << "Adding game objects" << std::endl;
+		auto e = AddEntity();
+		e.Add<MyComponent>("Kigu_Object");
+		e.Add<Transform>(0.5f, 5.2f);
 	}
 };
 

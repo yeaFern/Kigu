@@ -8,5 +8,7 @@
 #include "Window.h"
 
 #include "Scene.h"
+#include "Entity.h"
+#include "Components.h"
 
 #include "MathLib.h"

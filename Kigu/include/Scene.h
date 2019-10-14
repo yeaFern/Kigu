@@ -4,12 +4,22 @@
 #include <memory>
 #include <type_traits>
 
+#include "Entity.h"
+#include "Components.h"
+
 class Application;
 
 class Scene
 {
 private:
+	friend class SceneManager;
 
+	entt::registry m_Registry;
+protected:
+	inline Entity AddEntity()
+	{
+		return Entity(m_Registry, m_Registry.create());
+	}
 public:
 	virtual void OnEnter() = 0;
 };
@@ -24,6 +34,12 @@ public:
 		if (!m_SceneStack.empty())
 		{
 			// Update scene systems.
+			auto current = m_SceneStack.top();
+
+			// Sample to iterate over every transformable object.
+			current->m_Registry.view<Transform>().each([] (Transform& transform) {
+				std::cout << "(" << transform.position.x << ", " << transform.position.y << ")" << std::endl;;
+			});
 		}
 	}
 
