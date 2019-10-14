@@ -40,6 +40,7 @@ project "Kigu"
         "Kigu/src/**.cpp",
         "Kigu/src/**.h",
         "Kigu/include/**.h",
+		"Kigu/include/entt/entt.hpp",
 
         "Dependencies/glad/Src/**.c"
     }
