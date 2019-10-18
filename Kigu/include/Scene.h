@@ -16,9 +16,9 @@ private:
 
 	entt::registry m_Registry;
 protected:
-	inline Entity AddEntity()
+	inline Entity AddEntity(PrefabFactory prefab = KiguPrefabs::Default)
 	{
-		return Entity(m_Registry, m_Registry.create());
+		return prefab(m_Registry);
 	}
 public:
 	virtual void OnEnter() = 0;

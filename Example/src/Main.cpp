@@ -7,14 +7,17 @@ struct MyComponent
 	std::string name;
 };
 
+MakePrefab(BaseObject)
+	AddComponent(Transform, 1.5f, 5.0f)
+	AddComponent(MyComponent, "Kigu_Object")
+DonePrefab()
+
 class MainScene : public Scene
 {
 public:
 	void OnEnter() override
 	{
-		auto e = AddEntity();
-		e.Add<MyComponent>("Kigu_Object");
-		e.Add<Transform>(0.5f, 5.2f);
+		auto e = AddEntity(BaseObject);
 	}
 };
 
