@@ -387,3 +387,6 @@ MigrationBackup/
 **.vcxproj
 **.vcxproj.filters
 **.vcxproj.user
+
+# Kigu stuff
+Build/
