@@ -1,9 +1,3 @@
 #pragma once
 
-#include <iostream>
-#include <string>
-
-namespace Kigu
-{
-	void Test(const std::string& name);
-}
+#include "engine/Window.h"

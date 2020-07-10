@@ -2,7 +2,7 @@
 
 int main(int argc, char** argv)
 {
-	Kigu::Test("Example");
+    auto window = Kigu::Window::New();
 
     return 0;
 }
