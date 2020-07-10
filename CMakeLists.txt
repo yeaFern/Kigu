@@ -8,8 +8,16 @@ conan_basic_setup()
 
 file(GLOB_RECURSE KIGU_SOURCES
     Kigu/include/*.h
+    Kigu/src/*.h
     Kigu/src/*.cpp
 )
+
+foreach(_source IN ITEMS ${KIGU_SOURCES})
+    get_filename_component(_source_path "${_source}" PATH)
+    string(REPLACE "${CMAKE_SOURCE_DIR}" "" _group_path "${_source_path}")
+    string(REPLACE "/" "\\" _group_path "${_group_path}")
+    source_group("${_group_path}" FILES "${_source}")
+endforeach()
 
 file(GLOB_RECURSE EXAMPLE_SOURCES
     Example/*.h
