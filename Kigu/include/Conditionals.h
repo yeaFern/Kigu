@@ -1,5 +1,6 @@
 #pragma once
 
+// Platform macros.
 #ifdef _WIN32
     #ifdef _WIN64
         #define KIGU_WINDOWS
@@ -27,4 +28,9 @@
     #error "Linux is not supported."
 #else
     #error "Unknown platform."
+#endif
+
+// Debug macros.
+#ifdef DEBUG
+	#define KIGU_DEBUG
 #endif

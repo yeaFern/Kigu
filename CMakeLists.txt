@@ -24,6 +24,8 @@ file(GLOB_RECURSE EXAMPLE_SOURCES
     Example/*.cpp
 )
 
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
+
 add_library(${PROJECT_NAME} ${KIGU_SOURCES})
 target_link_libraries(${PROJECT_NAME} ${OPENGL_gl_LIBRARY} ${CONAN_LIBS})
 target_include_directories(${PROJECT_NAME} PRIVATE Kigu/include)
