@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8.12)
 project(Kigu)
 
 find_package(OpenGL)
+find_package(Vulkan REQUIRED FATAL_ERROR)
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
@@ -27,8 +28,9 @@ file(GLOB_RECURSE EXAMPLE_SOURCES
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
 
 add_library(${PROJECT_NAME} ${KIGU_SOURCES})
-target_link_libraries(${PROJECT_NAME} ${OPENGL_gl_LIBRARY} ${CONAN_LIBS})
+target_link_libraries(${PROJECT_NAME} ${OPENGL_gl_LIBRARY} ${Vulkan_LIBRARIES} ${CONAN_LIBS})
 target_include_directories(${PROJECT_NAME} PRIVATE Kigu/include)
+target_include_directories(${PROJECT_NAME} PRIVATE ${Vulkan_INCLUDE_DIRS})
 
 add_executable(Example ${EXAMPLE_SOURCES})
 target_link_libraries(Example ${PROJECT_NAME})

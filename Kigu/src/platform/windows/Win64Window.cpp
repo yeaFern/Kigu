@@ -2,6 +2,7 @@
 #ifdef KIGU_WINDOWS
 
 #include "../opengl/OpenGLContext.h"
+#include "../vulkan/VulkanContext.h"
 
 namespace Kigu
 {
@@ -12,7 +13,7 @@ namespace Kigu
 			// TODO: Error.
 		}
 
-		this->m_Context = new OpenGLContext;
+		this->m_Context = new VulkanContext;
 		this->m_Context->PreInit(nullptr);
 
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
