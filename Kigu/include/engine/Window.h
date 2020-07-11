@@ -8,6 +8,8 @@ namespace Kigu
     {
     public:
         virtual ~Window() = default;
+
+		virtual void Update() = 0;
     public:
         static std::shared_ptr<Window> New();
     };
