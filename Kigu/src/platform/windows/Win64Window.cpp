@@ -1,8 +1,11 @@
 #include "Win64Window.h"
 #ifdef KIGU_WINDOWS
 
+#ifdef KIGU_OPENGL
 #include "../opengl/OpenGLContext.h"
+#elif defined(KIGU_VULKAN)
 #include "../vulkan/VulkanContext.h"
+#endif
 
 namespace Kigu
 {
@@ -13,7 +16,12 @@ namespace Kigu
 			// TODO: Error.
 		}
 
+#ifdef KIGU_OPENGL
+		this->m_Context = new OpenGLContext;
+#elif defined(KIGU_VULKAN)
 		this->m_Context = new VulkanContext;
+#endif
+
 		this->m_Context->PreInit(nullptr);
 
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
@@ -31,6 +39,7 @@ namespace Kigu
 
     Win64Window::~Win64Window()
     {
+		m_Context->Destroy();
 		glfwTerminate();
     }
 
@@ -38,6 +47,11 @@ namespace Kigu
 	{
 		glfwPollEvents();
 		m_Context->Swap();
+	}
+
+	bool Win64Window::IsOpen()
+	{
+		return !glfwWindowShouldClose(m_Handle);
 	}
     
     WindowPtr Window::New()

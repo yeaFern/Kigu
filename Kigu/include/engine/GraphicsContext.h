@@ -11,5 +11,7 @@ namespace Kigu
 		virtual void Init(void* data) = 0;
 
 		virtual void Swap() = 0;
+
+		virtual void Destroy() = 0;
     };
 }

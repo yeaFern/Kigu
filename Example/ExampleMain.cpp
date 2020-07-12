@@ -5,7 +5,7 @@ int main(int argc, char** argv)
 {
     auto window = Kigu::Window::New();
 
-	for (;;)
+	while (window->IsOpen())
 	{
 		window->Update();
 	}

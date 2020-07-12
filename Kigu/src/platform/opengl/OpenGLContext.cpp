@@ -27,4 +27,8 @@ namespace Kigu
 	{
 		glfwSwapBuffers(m_Window);
 	}
+
+	void OpenGLContext::Destroy()
+	{
+	}
 }

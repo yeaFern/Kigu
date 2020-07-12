@@ -3,6 +3,9 @@
 #include "Conditionals.h"
 #ifdef KIGU_WINDOWS
 
+#ifdef KIGU_VULKAN
+#define GLFW_INCLUDE_VULKAN
+#endif
 #include <GLFW/glfw3.h>
 
 #include <iostream>
@@ -22,7 +25,9 @@ namespace Kigu
         virtual ~Win64Window();
 
 		void Update() override;
-    };
+    
+		bool IsOpen() override;
+	};
 }
 
 #endif

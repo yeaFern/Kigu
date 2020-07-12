@@ -30,6 +30,10 @@
     #error "Unknown platform."
 #endif
 
+// Renderer macros.
+// #define KIGU_OPENGL
+#define KIGU_VULKAN
+
 // Debug macros.
 #ifdef DEBUG
 	#define KIGU_DEBUG

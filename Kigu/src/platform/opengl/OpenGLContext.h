@@ -18,6 +18,8 @@ namespace Kigu
 		void Init(void* data) override;
 
 		void Swap() override;
+
+		void Destroy() override;
     };
 }
 
