@@ -3,6 +3,8 @@
 #include "Application.h"
 #include "Window.h"
 
+#include "util/Log.h"
+
 namespace Kigu
 {
 	class EngineCore
@@ -18,5 +20,9 @@ namespace Kigu
 	private:
 		void Initialize();
 		void Loop();
+	public:
+		static EngineCore* Instance() { return s_Instance; }
+	private:
+		static EngineCore* s_Instance;
 	};
 }

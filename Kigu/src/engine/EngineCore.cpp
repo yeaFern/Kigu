@@ -4,9 +4,17 @@
 
 namespace Kigu
 {
+	EngineCore* EngineCore::s_Instance = nullptr;
+
 	EngineCore::EngineCore(Application* app)
 		: m_Application(app)
 	{
+		if (s_Instance != nullptr)
+		{
+			LogFatal("Application already created.");
+		}
+
+		EngineCore::s_Instance = this;
 		Initialize();
 		Loop();
 	}
