@@ -1,4 +1,6 @@
+#include "engine/EngineCore.h"
 #include "engine/Window.h"
+#include "events/Event.h"
 
 namespace Kigu
 {
@@ -21,6 +23,10 @@ namespace Kigu
 
 		this->m_Context.Init(m_Handle);
 		gladLoadGL();
+
+		glfwSetWindowCloseCallback(m_Handle, [](GLFWwindow* window) {
+			EngineCore::Instance()->PostEvent(WindowCloseEvent());
+		});
 
 		glfwShowWindow(m_Handle);
     }

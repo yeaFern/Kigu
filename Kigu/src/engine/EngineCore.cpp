@@ -19,6 +19,18 @@ namespace Kigu
 		Loop();
 	}
 
+	void EngineCore::PostEvent(Event& event)
+	{
+		// TODO: Add to a queue and process at the start of the frame.
+
+		if (event.Type == EventType::WindowClose)
+		{
+			auto& e = static_cast<WindowCloseEvent&>(event);
+			// Do stuff with e...
+			m_Running = false;
+		}
+	}
+
 	void EngineCore::Initialize()
 	{
 		WindowProperties properties;
