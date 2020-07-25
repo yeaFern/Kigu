@@ -5,8 +5,9 @@ namespace Kigu
 	class Application
 	{
 	public:
-		Application();
-		virtual ~Application();
+		virtual ~Application() = default;
+
+		virtual void OnInitialize() = 0;
 
 		virtual void OnUpdate() = 0;
 	};

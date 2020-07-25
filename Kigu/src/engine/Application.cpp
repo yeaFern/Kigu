@@ -2,11 +2,5 @@
 
 namespace Kigu
 {
-	Application::Application()
-	{
-	}
 
-	Application::~Application()
-	{
-	}
 }

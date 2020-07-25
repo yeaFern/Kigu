@@ -390,3 +390,4 @@ MigrationBackup/
 
 # Kigu stuff
 Build/
+Data/ShaderCache/

@@ -16,6 +16,7 @@ namespace Kigu
 		WindowProperties properties;
 		this->m_Window = Window::New(properties);
 
+		this->m_Application->OnInitialize();
 		this->m_Running = true;
 	}
 

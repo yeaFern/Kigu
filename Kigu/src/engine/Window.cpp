@@ -6,7 +6,7 @@ namespace Kigu
     {
 		if (!glfwInit())
 		{
-			// TODO: Error.
+			LogFatal("Failed to initialize GLFW.");
 		}
 
 		this->m_Context.PreInit();
@@ -16,10 +16,11 @@ namespace Kigu
 		this->m_Handle = glfwCreateWindow(properties.Width, properties.Height, properties.Title.c_str(), nullptr, nullptr);
 		if (m_Handle == nullptr)
 		{
-			// TODO: Error.
+			LogFatal("Failed to create window.");
 		}
 
 		this->m_Context.Init(m_Handle);
+		gladLoadGL();
 
 		glfwShowWindow(m_Handle);
     }

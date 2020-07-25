@@ -6,6 +6,15 @@
 class ExampleApplication : public Kigu::Application
 {
 public:
+	void OnInitialize()
+	{
+		Kigu::ShaderPtr shader = Kigu::Shader::Create(
+			"Basic",
+			Kigu::File("Data/Shaders/Basic.vs"),
+			Kigu::File("Data/Shaders/Basic.fs")
+		);
+	}
+
 	void OnUpdate()
 	{
 	}
