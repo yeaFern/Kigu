@@ -1,14 +1,20 @@
 #include <Kigu.h>
+#include <KiguMain.h>
+
 #include <iostream>
 
-int main(int argc, char** argv)
+class ExampleApplication : public Kigu::Application
 {
-	auto window = Kigu::Window::New({});
-
-	while (window->IsOpen())
+public:
+	void OnUpdate()
 	{
-		window->Update();
 	}
+};
 
-    return 0;
+namespace Kigu
+{
+	Application* Create()
+	{
+		return new ExampleApplication;
+	}
 }
