@@ -1,6 +1,5 @@
 [requires]
 glfw/3.3.2@bincrafters/stable
-glad/0.1.33
 glm/0.9.9.7
 
 [generators]
