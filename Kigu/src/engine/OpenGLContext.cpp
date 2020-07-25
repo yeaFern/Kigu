@@ -1,8 +1,8 @@
-#include "OpenGLContext.h"
+#include "engine/OpenGLContext.h"
 
 namespace Kigu
 {
-	void OpenGLContext::PreInit(void* data)
+	void OpenGLContext::PreInit()
 	{
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
@@ -13,19 +13,17 @@ namespace Kigu
 #endif
 	}
 
-	void OpenGLContext::Init(void* data)
+	void OpenGLContext::Init(GLFWwindow* window)
 	{
-		this->m_Window = (GLFWwindow*)data;
-
-		glfwMakeContextCurrent(m_Window);
+		glfwMakeContextCurrent(window);
 #ifdef KIGU_DEBUG
 		// TODO: Set up OpenGL debug handler.
 #endif
 	}
 
-	void OpenGLContext::Swap()
+	void OpenGLContext::Swap(GLFWwindow* window)
 	{
-		glfwSwapBuffers(m_Window);
+		glfwSwapBuffers(window);
 	}
 
 	void OpenGLContext::Destroy()

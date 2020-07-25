@@ -3,7 +3,7 @@
 
 int main(int argc, char** argv)
 {
-    auto window = Kigu::Window::New();
+	auto window = Kigu::Window::New({});
 
 	while (window->IsOpen())
 	{
