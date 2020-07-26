@@ -19,18 +19,6 @@ namespace Kigu
 		Loop();
 	}
 
-	void EngineCore::PostEvent(Event& event)
-	{
-		// TODO: Add to a queue and process at the start of the frame.
-
-		if (event.Type == EventType::WindowClose)
-		{
-			auto& e = static_cast<WindowCloseEvent&>(event);
-			// Do stuff with e...
-			m_Running = false;
-		}
-	}
-
 	void EngineCore::Initialize()
 	{
 		WindowProperties properties;
@@ -44,6 +32,28 @@ namespace Kigu
 	{
 		while (m_Running)
 		{
+			while (!m_EventQueue.empty())
+			{
+				auto& event = *m_EventQueue.front();
+				
+				if (event.Type == EventType::WindowClose)
+				{
+					auto& e = static_cast<WindowCloseEvent&>(event);
+					m_Running = false;
+				}
+
+				if (event.Type == EventType::WindowResize)
+				{
+					auto& e = static_cast<WindowResizeEvent&>(event);
+					LogInfo(e.Width << "x" << e.Height);
+
+					// TODO: Move to renderer or something.
+					glViewport(0, 0, e.Width, e.Height);
+				}
+
+				m_EventQueue.pop();
+			}
+
 			this->m_Application->OnUpdate();
 
 			this->m_Window->Update();

@@ -1,5 +1,8 @@
 #pragma once
 
+#include <queue>
+#include <memory>
+
 #include "Application.h"
 #include "Window.h"
 
@@ -16,10 +19,13 @@ namespace Kigu
 		WindowPtr m_Window;
 
 		bool m_Running = false;
+
+		std::queue<std::unique_ptr<Event>> m_EventQueue;
 	public:
 		EngineCore(Application* app);
 
-		void PostEvent(Event& event);
+		template<typename T, class... Args>
+		void PostEvent(Args&&... args);
 	private:
 		void Initialize();
 		void Loop();
@@ -28,4 +34,10 @@ namespace Kigu
 	private:
 		static EngineCore* s_Instance;
 	};
+
+	template<typename T, class ...Args>
+	inline void EngineCore::PostEvent(Args&&... args)
+	{
+		m_EventQueue.push(std::make_unique<T>(std::forward<Args>(args)...));
+	}
 }

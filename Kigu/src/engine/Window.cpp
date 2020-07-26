@@ -25,7 +25,11 @@ namespace Kigu
 		gladLoadGL();
 
 		glfwSetWindowCloseCallback(m_Handle, [](GLFWwindow* window) {
-			EngineCore::Instance()->PostEvent(WindowCloseEvent());
+			EngineCore::Instance()->PostEvent<WindowCloseEvent>();
+		});
+
+		glfwSetFramebufferSizeCallback(m_Handle, [](GLFWwindow* window, int width, int height) {
+			EngineCore::Instance()->PostEvent<WindowResizeEvent>(width, height);
 		});
 
 		glfwShowWindow(m_Handle);

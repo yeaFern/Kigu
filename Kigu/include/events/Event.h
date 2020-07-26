@@ -4,7 +4,8 @@ namespace Kigu
 {
 	enum class EventType
 	{
-		WindowClose
+		WindowClose,
+		WindowResize
 	};
 
 	struct Event
@@ -23,6 +24,17 @@ namespace Kigu
 	{
 		WindowCloseEvent()
 			: Event(EventType::WindowClose)
+		{
+		}
+	};
+
+	struct WindowResizeEvent : public Event
+	{
+		uint32_t Width;
+		uint32_t Height;
+
+		WindowResizeEvent(uint32_t width, uint32_t height)
+			: Width(width), Height(height), Event(EventType::WindowResize)
 		{
 		}
 	};
