@@ -7,6 +7,7 @@
 #include "Window.h"
 #include "ImGuiLayer.h"
 
+#include "assets/AssetManager.h"
 #include "events/Event.h"
 #include "util/Log.h"
 

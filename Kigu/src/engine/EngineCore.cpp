@@ -21,6 +21,8 @@ namespace Kigu
 
 	void EngineCore::Initialize()
 	{
+		AssetManager::Initialize();
+
 		WindowProperties properties;
 		this->m_Window = Window::New(properties);
 
@@ -64,6 +66,16 @@ namespace Kigu
 			this->m_Application->OnUpdate();
 
 			this->m_ImGui.Begin();
+
+			ImGui::Begin("Assets");
+			for (auto it = AssetManager::Begin(); it != AssetManager::End(); ++it)
+			{
+				auto info = AssetManager::GetAssetTypeInfo(it->Type);
+				std::string line = it->Identifier + " : " + std::string(info.Name);
+				ImGui::Text("%s", line.c_str());
+			}
+			ImGui::End();
+
 			ImGui::ShowDemoWindow();
 			this->m_ImGui.End();
 
