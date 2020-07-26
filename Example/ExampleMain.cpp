@@ -19,6 +19,7 @@ public:
 
 	void OnUpdate()
 	{
+		Kigu::Renderer::Test();
 	}
 
 	void OnImGuiUpdate()

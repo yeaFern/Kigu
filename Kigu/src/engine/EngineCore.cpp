@@ -26,6 +26,8 @@ namespace Kigu
 		WindowProperties properties;
 		this->m_Window = Window::New(properties);
 
+		Renderer::Initialize();
+
 		this->m_ImGui.Initialize();
 
 		this->m_Application->OnInitialize();
@@ -62,6 +64,8 @@ namespace Kigu
 
 				m_EventQueue.pop();
 			}
+
+			Renderer::Clear();
 
 			this->m_Application->OnUpdate();
 

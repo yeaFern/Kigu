@@ -7,7 +7,9 @@
 
 #include "assets/AssetManager.h"
 
+#include "graphics/Renderer.h"
 #include "graphics/Shader.h"
+#include "graphics/VertexArray.h"
 
 #include "util/File.h"
 #include "util/Log.h"

@@ -26,7 +26,7 @@ namespace Kigu
 
 		ImGuiStyle& style = ImGui::GetStyle();
 		style.WindowRounding = 0.0f;
-		style.Colors[ImGuiCol_WindowBg].w = 0.8f;
+		style.Colors[ImGuiCol_WindowBg].w = 0.95f;
 		style.FrameRounding = 0.0f;
 		style.TabRounding = 0.0f;
 
