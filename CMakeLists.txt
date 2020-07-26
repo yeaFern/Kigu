@@ -11,6 +11,8 @@ file(GLOB_RECURSE KIGU_SOURCES
     Kigu/src/*.h
     Kigu/src/*.cpp
 	Dependencies/glad/glad.c
+	Dependencies/imgui/imgui/*.cpp
+	Dependencies/imgui/imgui/*.h
 )
 
 foreach(_source IN ITEMS ${KIGU_SOURCES})
@@ -32,6 +34,7 @@ add_library(${PROJECT_NAME} ${KIGU_SOURCES})
 target_link_libraries(${PROJECT_NAME} ${OPENGL_gl_LIBRARY} ${CONAN_LIBS})
 target_include_directories(${PROJECT_NAME} PRIVATE Kigu/include)
 target_include_directories(${PROJECT_NAME} PRIVATE Dependencies/glad/include)
+target_include_directories(${PROJECT_NAME} PRIVATE Dependencies/imgui)
 
 add_executable(Example ${EXAMPLE_SOURCES})
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Example)

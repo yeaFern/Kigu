@@ -52,6 +52,25 @@ namespace Kigu
 	{
 		return !glfwWindowShouldClose(m_Handle);
 	}
+
+	int Window::GetWidth() const
+	{
+		int w;
+		glfwGetWindowSize(m_Handle, &w, nullptr);
+		return w;
+	}
+
+	int Window::GetHeight() const
+	{
+		int h;
+		glfwGetWindowSize(m_Handle, nullptr, &h);
+		return h;
+	}
+
+	GLFWwindow* Window::GetGLFWWindow() const
+	{
+		return m_Handle;
+	}
     
     WindowPtr Window::New(const WindowProperties& properties)
     {

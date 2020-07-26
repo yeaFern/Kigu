@@ -31,6 +31,11 @@ namespace Kigu
 
 		void Update();
 		bool IsOpen();
+
+		int GetWidth() const;
+		int GetHeight() const;
+
+		GLFWwindow* GetGLFWWindow() const;
     public:
         static std::unique_ptr<Window> New(const WindowProperties& properties);
     };

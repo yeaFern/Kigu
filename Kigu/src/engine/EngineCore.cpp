@@ -1,6 +1,5 @@
-#pragma once
-
 #include "engine/EngineCore.h"
+#include "imgui/imgui.h"
 
 namespace Kigu
 {
@@ -17,6 +16,7 @@ namespace Kigu
 		EngineCore::s_Instance = this;
 		Initialize();
 		Loop();
+		Destroy();
 	}
 
 	void EngineCore::Initialize()
@@ -24,8 +24,15 @@ namespace Kigu
 		WindowProperties properties;
 		this->m_Window = Window::New(properties);
 
+		this->m_ImGui.Initialize();
+
 		this->m_Application->OnInitialize();
 		this->m_Running = true;
+	}
+
+	void EngineCore::Destroy()
+	{
+		this->m_ImGui.Destroy();
 	}
 
 	void EngineCore::Loop()
@@ -55,6 +62,10 @@ namespace Kigu
 			}
 
 			this->m_Application->OnUpdate();
+
+			this->m_ImGui.Begin();
+			ImGui::ShowDemoWindow();
+			this->m_ImGui.End();
 
 			this->m_Window->Update();
 		}
