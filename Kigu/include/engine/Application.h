@@ -10,5 +10,7 @@ namespace Kigu
 		virtual void OnInitialize() = 0;
 
 		virtual void OnUpdate() = 0;
+
+		virtual void OnImGuiUpdate() { };
 	};
 }

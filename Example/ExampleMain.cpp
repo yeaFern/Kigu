@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#include <imgui/imgui.h>
+
 class ExampleApplication : public Kigu::Application
 {
 public:
@@ -17,6 +19,20 @@ public:
 
 	void OnUpdate()
 	{
+	}
+
+	void OnImGuiUpdate()
+	{
+		ImGui::Begin("Assets");
+		for (auto it = Kigu::AssetManager::Begin(); it != Kigu::AssetManager::End(); ++it)
+		{
+			auto info = Kigu::AssetManager::GetAssetTypeInfo(it->Type);
+			std::string line = it->Identifier + " : " + std::string(info.Name);
+			ImGui::Text("%s", line.c_str());
+		}
+		ImGui::End();
+
+		ImGui::ShowDemoWindow();
 	}
 };
 
