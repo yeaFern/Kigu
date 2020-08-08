@@ -1,8 +1,6 @@
 #include "graphics/Shader.h"
 #include "graphics/ShaderCache.h"
 
-#include <iostream>
-
 namespace Kigu
 {
 	Shader::Shader(const std::string name, const File& vertex, const File& fragment)
@@ -37,7 +35,7 @@ namespace Kigu
 			CompileAndSave(vertex, fragment);
 		}
 	}
-
+	
 	GLint Shader::CompileShader(const File& source, ShaderType type)
 	{
 		if (!source.Exists())
@@ -104,16 +102,18 @@ namespace Kigu
 		GLint binaryLength = 0;
 		glGetProgramiv(m_Program, GL_PROGRAM_BINARY_LENGTH, &binaryLength);
 
-		// Allocate space for it.
-		char* binary = new char[binaryLength];
+		// Allocate space for the binary, as well as the binary format.
+		size_t bufferSize = sizeof(GLenum) + binaryLength;
+		char* binary = new char[sizeof(GLenum) + binaryLength];
 
 		// Get the binary from the driver, saving the format.
 		GLenum binaryFormat;
-		glGetProgramBinary(m_Program, binaryLength, nullptr, &binaryFormat, binary);
+		glGetProgramBinary(m_Program, binaryLength, nullptr, &binaryFormat, binary + sizeof(GLenum));
+		// Prefix the binary with the format.
+		*((GLenum*)binary) = binaryFormat;
 
 		// Write the binary to the cache.
-		// TODO: Write the format too.
-		ShaderCache::Write(m_Name, binary, binaryLength);
+		ShaderCache::Write(m_Name, binary, bufferSize);
 
 		// Clean up.
 		delete[] binary;
@@ -128,9 +128,15 @@ namespace Kigu
 		char* buffer = new char[binary.GetSize()];
 		binary.Read(buffer, binary.GetSize());
 
+		// Grab the format from the front of the buffer;
+		GLenum format = *((GLenum*)buffer);
+
+		// Calculate offset to start of the shader binary.
+		void* binaryStart = buffer + sizeof(GLenum);
+		size_t binaryLength = binary.GetSize() - sizeof(GLenum);
+
 		// Upload the binary.
-		// TODO: Read the format from the binary.
-		glProgramBinary(m_Program, 36894, buffer, binary.GetSize());
+		glProgramBinary(m_Program, format, binaryStart, binaryLength);
 
 		// Clean up.
 		delete[] buffer;

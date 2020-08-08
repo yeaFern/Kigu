@@ -2,18 +2,9 @@
 
 layout (location = 0) out vec4 FragColor;
 
-in vec2 pass_TexCoords;
-in vec4 pass_Color;
-
-uniform sampler2D u_SpriteAtlas;
+in vec3 pass_Color;
 
 void main()
 {    
-    FragColor = pass_Color;
-    FragColor = texture(u_SpriteAtlas, pass_TexCoords) * pass_Color;
-
-    if(FragColor.a == 0)
-    {
-        discard;
-    }
+    FragColor = vec4(pass_Color, 1.0);
 }

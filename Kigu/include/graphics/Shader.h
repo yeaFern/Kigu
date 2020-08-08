@@ -27,6 +27,8 @@ namespace Kigu
 			const File& vertex,
 			const File& fragment
 		);
+
+		inline GLuint GetProgram() const { return m_Program; }
 	private:
 		GLint CompileShader(const File& source, ShaderType type);
 

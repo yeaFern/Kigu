@@ -13,15 +13,17 @@ namespace Kigu
 		struct Vertex
 		{
 			float x, y, z;
+			float r, g, b;
 		};
 
 		s_VertexArray = new VertexArray;
 		s_VertexArray->SetData(std::vector<Vertex> {
-			{ 0.0f,  0.5f, 0.0f},
-			{-0.5f, -0.5f, 0.0f},
-			{ 0.5f, -0.5f, 0.0f}
+			{ 0.0f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f, },
+			{-0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, },
+			{ 0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, }
 		}, 1, {
-			{ AttribType::Float3, "v_Position" }
+			{ AttribType::Float3, "v_Position" },
+			{ AttribType::Float3, "v_Color" }
 		});
 	}
 

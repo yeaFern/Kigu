@@ -7,10 +7,12 @@
 
 class ExampleApplication : public Kigu::Application
 {
+private:
+	Kigu::ShaderPtr m_Shader;
 public:
 	void OnInitialize()
 	{
-		Kigu::ShaderPtr shader = Kigu::Shader::Create(
+		m_Shader = Kigu::Shader::Create(
 			"Basic",
 			Kigu::File("Data/Shaders/Basic.vs"),
 			Kigu::File("Data/Shaders/Basic.fs")
@@ -19,6 +21,15 @@ public:
 
 	void OnUpdate()
 	{
+		// Kigu::Renderer::BeginPass();
+		// Kigu::Renderer::UseFramebuffer(Framebuffer::Default());
+		// Kigu::Renderer::UseShader(m_Shader);
+
+		// Kigu::Renderer::Submit(m_MyMesh);
+		
+		// Kigu::Renderer::EndPass();
+
+		glUseProgram(m_Shader->GetProgram());
 		Kigu::Renderer::Test();
 	}
 
