@@ -10,6 +10,7 @@
 #include "graphics/Renderer.h"
 #include "graphics/Shader.h"
 #include "graphics/VertexArray.h"
+#include "graphics/Framebuffer.h"
 
 #include "util/File.h"
 #include "util/Log.h"

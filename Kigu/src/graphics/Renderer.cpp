@@ -2,29 +2,11 @@
 
 namespace Kigu
 {
-	static VertexArray* s_VertexArray;
-
 	void Renderer::Initialize()
 	{
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_DEPTH_TEST);
-	
-		struct Vertex
-		{
-			float x, y, z;
-			float r, g, b;
-		};
-
-		s_VertexArray = new VertexArray;
-		s_VertexArray->SetData(std::vector<Vertex> {
-			{ 0.0f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f, },
-			{-0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, },
-			{ 0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, }
-		}, 1, {
-			{ AttribType::Float3, "v_Position" },
-			{ AttribType::Float3, "v_Color" }
-		});
 	}
 
 	void Renderer::Clear(unsigned int flags)
@@ -32,9 +14,34 @@ namespace Kigu
 		glClear(flags);
 	}
 
-	void Renderer::Test()
+	void Renderer::BeginPass(const std::string& name)
 	{
-		s_VertexArray->Bind();
-		s_VertexArray->Render();
+
+	}
+
+	void Renderer::EndPass()
+	{
+
+	}
+
+	void Renderer::UseFramebuffer(GLuint handle)
+	{
+		glBindFramebuffer(GL_FRAMEBUFFER, handle);
+	}
+
+	void Renderer::UseFramebuffer(const FramebufferPtr& framebuffer)
+	{
+		UseFramebuffer(framebuffer->GetHandle());
+	}
+
+	void Renderer::UseShader(const ShaderPtr& shader)
+	{
+		glUseProgram(shader->GetProgram());
+	}
+	
+	void Renderer::Submit(VertexArray* mesh)
+	{
+		mesh->Bind();
+		mesh->Render();
 	}
 }

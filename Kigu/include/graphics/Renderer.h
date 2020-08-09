@@ -2,6 +2,8 @@
 
 #include <glad/glad.h>
 
+#include "graphics/Framebuffer.h"
+#include "graphics/Shader.h"
 #include "graphics/VertexArray.h"
 
 namespace Kigu
@@ -22,6 +24,14 @@ namespace Kigu
 
 		static void Clear(unsigned int flags = ClearFlags::Color | ClearFlags::Depth | ClearFlags::Stencil);
 
-		static void Test();
+		static void BeginPass(const std::string& name);
+		static void EndPass();
+
+		static void UseFramebuffer(GLuint handle);
+		static void UseFramebuffer(const FramebufferPtr& framebuffer);
+
+		static void UseShader(const ShaderPtr& shader);
+
+		static void Submit(VertexArray* mesh);
 	};
 }

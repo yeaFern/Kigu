@@ -9,6 +9,7 @@ class ExampleApplication : public Kigu::Application
 {
 private:
 	Kigu::ShaderPtr m_Shader;
+	Kigu::VertexArray* m_VertexArray;
 public:
 	void OnInitialize()
 	{
@@ -17,20 +18,33 @@ public:
 			Kigu::File("Data/Shaders/Basic.vs"),
 			Kigu::File("Data/Shaders/Basic.fs")
 		);
+
+		struct Vertex
+		{
+			float x, y, z;
+			float r, g, b;
+		};
+
+		m_VertexArray = new Kigu::VertexArray;
+		m_VertexArray->SetData(std::vector<Vertex> {
+			{ 0.0f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, },
+			{ -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, },
+			{ 0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, }
+		}, 1, {
+			{ Kigu::AttribType::Float3, "v_Position" },
+			{ Kigu::AttribType::Float3, "v_Color" }
+		});
 	}
 
 	void OnUpdate()
 	{
-		// Kigu::Renderer::BeginPass();
-		// Kigu::Renderer::UseFramebuffer(Framebuffer::Default());
-		// Kigu::Renderer::UseShader(m_Shader);
+		Kigu::Renderer::BeginPass("Main");
+		Kigu::Renderer::UseFramebuffer(Kigu::Framebuffer::Default);
+		Kigu::Renderer::UseShader(m_Shader);
 
-		// Kigu::Renderer::Submit(m_MyMesh);
+		Kigu::Renderer::Submit(m_VertexArray);
 		
-		// Kigu::Renderer::EndPass();
-
-		glUseProgram(m_Shader->GetProgram());
-		Kigu::Renderer::Test();
+		Kigu::Renderer::EndPass();
 	}
 
 	void OnImGuiUpdate()
